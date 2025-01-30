@@ -11,7 +11,7 @@ jobs:
       id-token: write
     if: >-
       github.event.review.state == 'approved' &&
-      github.event.repository == 'aws/configure-aws-credentials' &&
+      github.event.repository == 'lehmanmj/configure-aws-credentials' &&
       (github.event.review.author_association == 'OWNER' || github.event.review.user.login == 'aws-sdk-osds')
     runs-on: ubuntu-latest
     steps:
