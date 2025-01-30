@@ -10,7 +10,7 @@ jobs:
     - name: Print context
       run: |
         echo "The review state is ${{ github.event.review.state }}"
-        echo "The repository is ${{ github.event.repository }}"
+        echo "The repository is ${{ github.repository }}"
         echo "The review author-association is ${{ github.event.review.author_association }}"
         echo "The review user-login is ${{ github.event.review.user.login }}"
 
