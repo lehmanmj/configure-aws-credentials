@@ -1,6 +1,5 @@
-'use strict';
-
-var __createBinding = (undefined && undefined.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     var desc = Object.getOwnPropertyDescriptor(m, k);
     if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
@@ -11,12 +10,12 @@ var __createBinding = (undefined && undefined.__createBinding) || (Object.create
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
 }));
-var __setModuleDefault = (undefined && undefined.__setModuleDefault) || (Object.create ? (function(o, v) {
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
     Object.defineProperty(o, "default", { enumerable: true, value: v });
 }) : function(o, v) {
     o["default"] = v;
 });
-var __importStar = (undefined && undefined.__importStar) || (function () {
+var __importStar = (this && this.__importStar) || (function () {
     var ownKeys = function(o) {
         ownKeys = Object.getOwnPropertyNames || function (o) {
             var ar = [];
@@ -244,3 +243,4 @@ if (require.main === module) {
         core.setFailed((0, helpers_1.errorMessage)(error));
     });
 }
+//# sourceMappingURL=index.js.map
