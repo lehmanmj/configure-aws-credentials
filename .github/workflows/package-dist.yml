@@ -27,6 +27,8 @@ jobs:
           npm ci
           npm test
           npm run package
+      - name: check status
+        run: git status
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6
         with:
