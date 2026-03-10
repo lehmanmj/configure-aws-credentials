@@ -21,6 +21,7 @@ const REGION_REGEX = /^[a-z0-9-]+$/g;
 
 export async function run() {
   try {
+    console.log('hi');
     translateEnvVariables();
     // Get inputs
     // Undefined inputs are empty strings ( or empty arrays)
