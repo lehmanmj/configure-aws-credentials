@@ -9,7 +9,7 @@ exports.modules = {
 
 
 var sharedIniFileLoader = __webpack_require__(4964);
-var propertyProvider = __webpack_require__(1238);
+var propertyProvider = __webpack_require__(8857);
 var client = __webpack_require__(5152);
 var credentialProviderLogin = __webpack_require__(4072);
 
@@ -240,7 +240,7 @@ exports.fromIni = fromIni;
 
 
 var client = __webpack_require__(5152);
-var propertyProvider = __webpack_require__(1238);
+var propertyProvider = __webpack_require__(8857);
 var sharedIniFileLoader = __webpack_require__(4964);
 var protocolHttp = __webpack_require__(2356);
 var node_crypto = __webpack_require__(7598);
@@ -285,7 +285,7 @@ class LoginCredentialsFetcher {
         return this.profileData.login_session;
     }
     async refresh(token) {
-        const { SigninClient, CreateOAuth2TokenCommand } = await __webpack_require__.e(/* import() */ 762).then(__webpack_require__.t.bind(__webpack_require__, 9762, 19));
+        const { SigninClient, CreateOAuth2TokenCommand } = await __webpack_require__.e(/* import() */ 762).then(__webpack_require__.t.bind(__webpack_require__, 9762, 23));
         const { logger, userAgentAppId } = this.callerClientConfig ?? {};
         const isH2 = (requestHandler) => {
             return requestHandler?.metadata?.handlerProtocol === "h2";
