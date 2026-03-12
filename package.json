@@ -6,7 +6,7 @@
     "build": "tsc",
     "lint": "biome check --error-on-warnings ./src",
     "lint:fix": "biome check --write ./src",
-    "package": "npm run build && ncc build --license THIRD-PARTY -o dist && ncc build src/cleanup/index.ts -o dist/cleanup && cp dist/THIRD-PARTY . && del-cli dist/THIRD-PARTY",
+    "package": "esbuild src/index.ts --bundle --platform=node --target=node24 --outfile=dist/index.js && esbuild src/cleanup/index.ts --bundle --platform=node --target=node24 --outfile=dist/cleanup/index.js",
     "test": "npm run lint && vitest run && npm run build",
     "clean": "del-cli coverage test-reports node_modules"
   },
@@ -32,7 +32,7 @@
     "vitest": "^3.2.4"
   },
   "dependencies": {
-    "@actions/core": "^2.0.2",
+    "@actions/core": "^3.0.0",
     "@aws-sdk/client-sts": "^3.1005.0",
     "@smithy/node-http-handler": "^4.4.7",
     "esbuild": "^0.27.3",

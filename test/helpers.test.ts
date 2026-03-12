@@ -3,6 +3,8 @@ import * as core from '@actions/core';
 import { describe, expect, it, vi } from 'vitest';
 import * as helpers from '../src/helpers';
 
+vi.mock('@actions/core', {spy: true});
+
 describe('Configure AWS Credentials helpers', {}, () => {
   beforeEach(() => {
     vi.restoreAllMocks();

@@ -5,6 +5,8 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { cleanup } from '../src/cleanup';
 import mocks from './mockinputs.test';
 
+vi.mock('@actions/core', {spy: true});
+
 const mockedSTSClient = mockClient(STSClient);
 
 describe('Configure AWS Credentials cleanup', {}, () => {

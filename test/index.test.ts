@@ -12,6 +12,8 @@ import { CredentialsClient } from '../src/CredentialsClient';
 import { run } from '../src/index';
 import mocks from './mockinputs.test';
 
+vi.mock('@actions/core', {spy: true});
+
 const mockedSTSClient = mockClient(STSClient);
 
 describe('Configure AWS Credentials', {}, () => {
