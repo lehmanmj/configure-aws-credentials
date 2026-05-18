@@ -76432,6 +76432,7 @@ async function assumeRoleWithWebIdentityTokenFile(params, client, webIdentityTok
   try {
     const webIdentityToken = import_node_fs2.default.readFileSync(webIdentityTokenFilePath, "utf8");
     delete params.Tags;
+    delete params.TransitiveTagKeys;
     const creds = await client.send(
       new import_client_sts2.AssumeRoleWithWebIdentityCommand({
         ...params,
@@ -78074,10 +78075,14 @@ async function run() {
         process.exit(1);
       }, globalTimeout * 1e3);
     }
-    if (forceSkipOidc && roleToAssume && !AccessKeyId && !webIdentityTokenFile) {
+    const hasContainerCredentials = !!(process.env.AWS_CONTAINER_CREDENTIALS_RELATIVE_URI || process.env.AWS_CONTAINER_CREDENTIALS_FULL_URI);
+    if (forceSkipOidc && roleToAssume && !AccessKeyId && !webIdentityTokenFile && !hasContainerCredentials) {
       throw new Error(
-        "If 'force-skip-oidc' is true and 'role-to-assume' is set, 'aws-access-key-id' or 'web-identity-token-file' must be set"
+        "If 'force-skip-oidc' is true and 'role-to-assume' is set, 'aws-access-key-id', 'web-identity-token-file', or container credentials must be available"
       );
+    }
+    if (forceSkipOidc && hasContainerCredentials && !AccessKeyId && !webIdentityTokenFile) {
+      info("Using container credentials from AWS_CONTAINER_CREDENTIALS_* environment variables");
     }
     if (specialCharacterWorkaround) {
       disableRetry = false;
