@@ -76572,6 +76572,7 @@ async function assumeRole(params) {
     debug("Role session tagging has been skipped.");
   } else {
     debug(`${tags.length} role session tags are being used:`);
+    debug(JSON.stringify(tags, null, 2));
   }
   const transitiveTagKeysArray = roleSkipSessionTagging ? void 0 : transitiveTagKeys?.filter((key) => tags?.some((tag2) => tag2.Key === key));
   let roleArn = roleToAssume;
