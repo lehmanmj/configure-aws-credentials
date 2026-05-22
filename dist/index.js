@@ -76463,7 +76463,6 @@ var PROTECTED_TAG_SOURCES = [
   { key: "Workflow", envVar: "GITHUB_WORKFLOW" },
   { key: "Action", envVar: "GITHUB_ACTION" },
   { key: "Actor", envVar: "GITHUB_ACTOR" },
-  { key: "Commit", envVar: "GITHUB_SHA" },
   { key: "Branch", envVar: "GITHUB_REF" }
 ];
 var OVERRIDEABLE_TAG_SOURCES_BY_PRIORITY = [

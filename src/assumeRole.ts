@@ -94,7 +94,6 @@ const PROTECTED_TAG_SOURCES: ReadonlyArray<{ key: string; envVar: string }> = [
   { key: 'Workflow', envVar: 'GITHUB_WORKFLOW' },
   { key: 'Action', envVar: 'GITHUB_ACTION' },
   { key: 'Actor', envVar: 'GITHUB_ACTOR' },
-  { key: 'Commit', envVar: 'GITHUB_SHA' },
   { key: 'Branch', envVar: 'GITHUB_REF' },
 ];
 
