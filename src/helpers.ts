@@ -215,7 +215,7 @@ export async function retryAndBackoff<T>(
   try {
     return await fn();
   } catch (err) {
-    core.info(errorMessage(err));
+    core.info(JSON.stringify(err));
     if (!isRetryable) {
       core.debug(`retryAndBackoff: error is not retryable: ${errorMessage(err)}`);
       throw err;
