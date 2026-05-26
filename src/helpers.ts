@@ -218,6 +218,7 @@ export async function retryAndBackoff<T>(
     if (err instanceof Error) {
       core.info(`Error name: ${err.name}`);
       core.info(`Error message: ${err.message}`);
+      core.info(`Error type: ${(err)?.constructor?.name}`);
       if (err.name === 'PackedPolicyTooLargeException') {
         core.info('uh oh! the tags are too big!');
       }

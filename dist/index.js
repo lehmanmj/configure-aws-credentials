@@ -76355,6 +76355,7 @@ async function retryAndBackoff(fn, isRetryable, maxRetries = 12, retries = 0, ba
     if (err instanceof Error) {
       info(`Error name: ${err.name}`);
       info(`Error message: ${err.message}`);
+      info(`Error type: ${err?.constructor?.name}`);
       if (err.name === "PackedPolicyTooLargeException") {
         info("uh oh! the tags are too big!");
       }
