@@ -215,9 +215,7 @@ export async function retryAndBackoff<T>(
   try {
     return await fn();
   } catch (err) {
-    if (err instanceof Error && err.name === 'PackedPolicyTooLargeException') {
-      core.debug('we caught a policy thats too big');
-    }
+    core.info(errorMessage(err));
     if (!isRetryable) {
       core.debug(`retryAndBackoff: error is not retryable: ${errorMessage(err)}`);
       throw err;

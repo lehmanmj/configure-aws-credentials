@@ -76352,9 +76352,7 @@ async function retryAndBackoff(fn, isRetryable, maxRetries = 12, retries = 0, ba
   try {
     return await fn();
   } catch (err) {
-    if (err instanceof Error && err.name === "PackedPolicyTooLargeException") {
-      debug("we caught a policy thats too big");
-    }
+    info(errorMessage(err));
     if (!isRetryable) {
       debug(`retryAndBackoff: error is not retryable: ${errorMessage(err)}`);
       throw err;
