@@ -76352,7 +76352,13 @@ async function retryAndBackoff(fn, isRetryable, maxRetries = 12, retries = 0, ba
   try {
     return await fn();
   } catch (err) {
-    info(`ASDF: ${String(err)}`);
+    if (err instanceof Error) {
+      info(`Error name: ${err.name}`);
+      info(`Error message: ${err.message}`);
+      if (err.name === "PackedPolicyTooLargeException") {
+        info("uh oh! the tags are too big!");
+      }
+    }
     if (!isRetryable) {
       debug(`retryAndBackoff: error is not retryable: ${errorMessage(err)}`);
       throw err;
