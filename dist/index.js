@@ -47396,7 +47396,7 @@ var require_errors2 = __commonJS({
       }
     };
     exports2.MalformedPolicyDocumentException = MalformedPolicyDocumentException2;
-    var PackedPolicyTooLargeException2 = class _PackedPolicyTooLargeException extends STSServiceException_1.STSServiceException {
+    var PackedPolicyTooLargeException3 = class _PackedPolicyTooLargeException extends STSServiceException_1.STSServiceException {
       name = "PackedPolicyTooLargeException";
       $fault = "client";
       constructor(opts) {
@@ -47408,7 +47408,7 @@ var require_errors2 = __commonJS({
         Object.setPrototypeOf(this, _PackedPolicyTooLargeException.prototype);
       }
     };
-    exports2.PackedPolicyTooLargeException = PackedPolicyTooLargeException2;
+    exports2.PackedPolicyTooLargeException = PackedPolicyTooLargeException3;
     var RegionDisabledException2 = class _RegionDisabledException extends STSServiceException_1.STSServiceException {
       name = "RegionDisabledException";
       $fault = "client";
@@ -76352,6 +76352,9 @@ async function retryAndBackoff(fn, isRetryable, maxRetries = 12, retries = 0, ba
   try {
     return await fn();
   } catch (err) {
+    if (err instanceof import_client_sts.PackedPolicyTooLargeException) {
+      debug("we caught a policy thats too big");
+    }
     if (!isRetryable) {
       debug(`retryAndBackoff: error is not retryable: ${errorMessage(err)}`);
       throw err;

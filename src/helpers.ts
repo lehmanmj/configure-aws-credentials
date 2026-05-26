@@ -1,6 +1,6 @@
 import * as core from '@actions/core';
 import type { Credentials, STSClient } from '@aws-sdk/client-sts';
-import { GetCallerIdentityCommand } from '@aws-sdk/client-sts';
+import { GetCallerIdentityCommand, PackedPolicyTooLargeException } from '@aws-sdk/client-sts';
 import type { UserAgent } from '@smithy/types';
 import type { CredentialsClient } from './CredentialsClient';
 
@@ -215,6 +215,9 @@ export async function retryAndBackoff<T>(
   try {
     return await fn();
   } catch (err) {
+    if (err instanceof PackedPolicyTooLargeException) {
+      core.debug('we caught a policy thats too big');
+    }
     if (!isRetryable) {
       core.debug(`retryAndBackoff: error is not retryable: ${errorMessage(err)}`);
       throw err;
