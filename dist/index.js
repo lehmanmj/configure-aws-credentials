@@ -74081,21 +74081,15 @@ var MAX_TAG_VALUE_LENGTH2 = 256;
 var MAX_SESSION_TAGS = 50;
 var PROTECTED_TAG_SOURCES = [
   { key: "Repository", envVar: "GITHUB_REPOSITORY" },
-  { key: "Workflow", envVar: "GITHUB_WORKFLOW" },
-  { key: "Action", envVar: "GITHUB_ACTION" },
-  { key: "Actor", envVar: "GITHUB_ACTOR" },
   { key: "Commit", envVar: "GITHUB_SHA" },
   { key: "Branch", envVar: "GITHUB_REF" }
 ];
 var OVERRIDEABLE_TAG_SOURCES_BY_PRIORITY = [
-  { key: "EventName", envVar: "GITHUB_EVENT_NAME" },
   { key: "BaseRef", envVar: "GITHUB_BASE_REF" },
   { key: "HeadRef", envVar: "GITHUB_HEAD_REF" },
-  { key: "RefName", envVar: "GITHUB_REF_NAME" },
   { key: "RunId", envVar: "GITHUB_RUN_ID" },
   { key: "RefType", envVar: "GITHUB_REF_TYPE" },
-  { key: "Job", envVar: "GITHUB_JOB" },
-  { key: "TriggeringActor", envVar: "GITHUB_TRIGGERING_ACTOR" }
+  { key: "Job", envVar: "GITHUB_JOB" }
 ];
 var PROTECTED_TAG_KEYS = /* @__PURE__ */ new Set(["GitHub", ...PROTECTED_TAG_SOURCES.map((s) => s.key)]);
 function parseAndValidateCustomTags(customTags, existingTags) {
@@ -74168,7 +74162,7 @@ async function assumeRole(params) {
   if (!GITHUB_REPOSITORY || !GITHUB_WORKFLOW || !GITHUB_ACTION || !GITHUB_ACTOR || !GITHUB_SHA || !GITHUB_WORKSPACE) {
     throw new Error("Missing required environment variables. Are you running in GitHub Actions?");
   }
-  const protectedTags = [{ Key: "GitHub", Value: "Actions" }];
+  const protectedTags = [];
   for (const { key, envVar } of PROTECTED_TAG_SOURCES) {
     const value = process.env[envVar];
     if (value) {

@@ -90,9 +90,6 @@ const MAX_SESSION_TAGS = 50;
 // Identity/audit primitives. Always emitted and cannot be overridden by custom-tags.
 const PROTECTED_TAG_SOURCES: ReadonlyArray<{ key: string; envVar: string }> = [
   { key: 'Repository', envVar: 'GITHUB_REPOSITORY' },
-  { key: 'Workflow', envVar: 'GITHUB_WORKFLOW' },
-  { key: 'Action', envVar: 'GITHUB_ACTION' },
-  { key: 'Actor', envVar: 'GITHUB_ACTOR' },
   { key: 'Commit', envVar: 'GITHUB_SHA' },
   { key: 'Branch', envVar: 'GITHUB_REF' },
 ];
@@ -101,14 +98,11 @@ const PROTECTED_TAG_SOURCES: ReadonlyArray<{ key: string; envVar: string }> = [
 // Listed in priority order; lower-priority entries are dropped first if the user's custom-tags
 // would push the total above MAX_SESSION_TAGS.
 const OVERRIDEABLE_TAG_SOURCES_BY_PRIORITY: ReadonlyArray<{ key: string; envVar: string }> = [
-  { key: 'EventName', envVar: 'GITHUB_EVENT_NAME' },
   { key: 'BaseRef', envVar: 'GITHUB_BASE_REF' },
   { key: 'HeadRef', envVar: 'GITHUB_HEAD_REF' },
-  { key: 'RefName', envVar: 'GITHUB_REF_NAME' },
   { key: 'RunId', envVar: 'GITHUB_RUN_ID' },
   { key: 'RefType', envVar: 'GITHUB_REF_TYPE' },
   { key: 'Job', envVar: 'GITHUB_JOB' },
-  { key: 'TriggeringActor', envVar: 'GITHUB_TRIGGERING_ACTOR' },
 ];
 
 const PROTECTED_TAG_KEYS = new Set<string>(['GitHub', ...PROTECTED_TAG_SOURCES.map((s) => s.key)]);
@@ -197,7 +191,7 @@ export async function assumeRole(params: assumeRoleParams) {
 
   // Build session tags. Values are sanitized because the AWS tag value spec is more
   // restrictive than permissible characters in environment variables.
-  const protectedTags: Tag[] = [{ Key: 'GitHub', Value: 'Actions' }];
+  const protectedTags: Tag[] = [];
   for (const { key, envVar } of PROTECTED_TAG_SOURCES) {
     const value = process.env[envVar];
     if (value) {
