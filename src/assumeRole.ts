@@ -101,7 +101,6 @@ const OVERRIDEABLE_TAG_SOURCES_BY_PRIORITY: ReadonlyArray<{ key: string; envVar:
   { key: 'BaseRef', envVar: 'GITHUB_BASE_REF' },
   { key: 'HeadRef', envVar: 'GITHUB_HEAD_REF' },
   { key: 'RunId', envVar: 'GITHUB_RUN_ID' },
-  { key: 'RefType', envVar: 'GITHUB_REF_TYPE' },
   { key: 'Job', envVar: 'GITHUB_JOB' },
 ];
 

@@ -74088,7 +74088,6 @@ var OVERRIDEABLE_TAG_SOURCES_BY_PRIORITY = [
   { key: "BaseRef", envVar: "GITHUB_BASE_REF" },
   { key: "HeadRef", envVar: "GITHUB_HEAD_REF" },
   { key: "RunId", envVar: "GITHUB_RUN_ID" },
-  { key: "RefType", envVar: "GITHUB_REF_TYPE" },
   { key: "Job", envVar: "GITHUB_JOB" }
 ];
 var PROTECTED_TAG_KEYS = /* @__PURE__ */ new Set(["GitHub", ...PROTECTED_TAG_SOURCES.map((s) => s.key)]);
