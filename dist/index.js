@@ -44990,7 +44990,7 @@ var require_errors2 = __commonJS({
       }
     };
     exports2.MalformedPolicyDocumentException = MalformedPolicyDocumentException2;
-    var PackedPolicyTooLargeException2 = class _PackedPolicyTooLargeException extends STSServiceException_1.STSServiceException {
+    var PackedPolicyTooLargeException3 = class _PackedPolicyTooLargeException extends STSServiceException_1.STSServiceException {
       name = "PackedPolicyTooLargeException";
       $fault = "client";
       constructor(opts) {
@@ -45002,7 +45002,7 @@ var require_errors2 = __commonJS({
         Object.setPrototypeOf(this, _PackedPolicyTooLargeException.prototype);
       }
     };
-    exports2.PackedPolicyTooLargeException = PackedPolicyTooLargeException2;
+    exports2.PackedPolicyTooLargeException = PackedPolicyTooLargeException3;
     var RegionDisabledException2 = class _RegionDisabledException extends STSServiceException_1.STSServiceException {
       name = "RegionDisabledException";
       $fault = "client";
@@ -74071,6 +74071,9 @@ async function assumeRoleWithCredentials(params, client) {
     const creds = await client.send(new import_client_sts2.AssumeRoleCommand({ ...params }));
     return creds;
   } catch (error3) {
+    if (error3 instanceof import_client_sts2.PackedPolicyTooLargeException) {
+      info("I caught this policy that was too big!");
+    }
     throw new Error(`Could not assume role with user credentials: ${errorMessage(error3)}`);
   }
 }

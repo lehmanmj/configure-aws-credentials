@@ -2,7 +2,11 @@ import assert from 'node:assert';
 import path from 'node:path';
 import * as core from '@actions/core';
 import type { AssumeRoleCommandInput, STSClient, Tag } from '@aws-sdk/client-sts';
-import { AssumeRoleCommand, AssumeRoleWithWebIdentityCommand } from '@aws-sdk/client-sts';
+import {
+  AssumeRoleCommand,
+  AssumeRoleWithWebIdentityCommand,
+  PackedPolicyTooLargeException,
+} from '@aws-sdk/client-sts';
 import type { CredentialsClient } from './CredentialsClient';
 import { errorMessage, isDefined, readFileUtf8, sanitizeGitHubVariables } from './helpers';
 
@@ -61,6 +65,9 @@ async function assumeRoleWithCredentials(params: AssumeRoleCommandInput, client:
     const creds = await client.send(new AssumeRoleCommand({ ...params }));
     return creds;
   } catch (error) {
+    if (error instanceof PackedPolicyTooLargeException) {
+      core.info('I caught this policy that was too big!');
+    }
     throw new Error(`Could not assume role with user credentials: ${errorMessage(error)}`);
   }
 }
